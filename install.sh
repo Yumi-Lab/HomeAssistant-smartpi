@@ -1,23 +1,26 @@
 #!/bin/bash
 
 # Mettre à jour le système
-sudo apt update && sudo apt upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 
-# Installer les dépendances système nécessaires
-sudo apt install -y python3 python3-venv python3-pip libffi-dev libssl-dev autoconf build-essential cargo
+# Installer les outils et bibliothèques de compilation nécessaires
+sudo apt-get install -y build-essential libssl-dev libffi-dev python3-dev cargo
+
+# Installer les dépendances système nécessaires pour Home Assistant
+sudo apt-get install -y python3 python3-venv python3-pip
 
 # Vérifier et créer le groupe gpio si nécessaire
 if [ ! $(getent group gpio) ]; then
     sudo groupadd gpio
-    echo "Group gpio created."
+    echo "Groupe gpio créé."
 fi
 
 # Créer un utilisateur pour Home Assistant sans dossier home mais avec un shell
 if [ ! $(getent passwd homeassistant) ]; then
     sudo useradd -rm homeassistant -G dialout,i2c,gpio
-    echo "User homeassistant created successfully."
+    echo "Utilisateur homeassistant créé avec succès."
 else
-    echo "User homeassistant already exists."
+    echo "L'utilisateur homeassistant existe déjà."
 fi
 
 # Créer un dossier pour l'installation de Home Assistant et attribuer les permissions
