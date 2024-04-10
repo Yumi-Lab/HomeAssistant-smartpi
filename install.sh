@@ -3,7 +3,7 @@
 # Mettre à jour le système
 sudo apt-get update && sudo apt-get upgrade -y
 
-# Installer les outils et bibliothèques de compilation nécessaires
+# Installer les outils et bibliothèques de compilation nécessaires, y compris libssl-dev pour cryptography
 sudo apt-get install -y build-essential libssl-dev libffi-dev python3-dev cargo
 
 # Installer les dépendances système nécessaires pour Home Assistant
